@@ -1,0 +1,24 @@
+services:
+
+  backend:
+    build:
+      context: ./Backend(strapi)
+    ports:
+      - "1337:1337"
+    volumes:
+      # volume persistant pour la base de donnees SQLite
+      - strapi-db:/app/.tmp
+    env_file:
+      - ./Backend(strapi)/.env
+
+  frontend:
+    build:
+      context: ./frontend(react)
+    ports:
+      # le frontend est accessible sur localhost:3000
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  strapi-db:

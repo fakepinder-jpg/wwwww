@@ -1,0 +1,44 @@
+{
+    "kind": "collectionType",
+    "collectionName": "cards",
+    "info": {
+        "singularName": "card",
+        "pluralName": "cards",
+        "displayName": "Card",
+        "description": "Cartes de tâches dans les listes Kanban"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true,
+            "default": "Nouvelle carte"
+        },
+        "description": {
+            "type": "text"
+        },
+        "order": {
+            "type": "integer",
+            "required": true,
+            "default": 0
+        },
+        "dueDate": {
+            "type": "date"
+        },
+        "list": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::list.list",
+            "inversedBy": "cards"
+        },
+        "labels": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::label.label",
+            "inversedBy": "cards"
+        }
+    }
+}

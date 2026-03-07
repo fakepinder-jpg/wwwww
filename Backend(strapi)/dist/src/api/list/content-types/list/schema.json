@@ -1,0 +1,38 @@
+{
+    "kind": "collectionType",
+    "collectionName": "lists",
+    "info": {
+        "singularName": "list",
+        "pluralName": "lists",
+        "displayName": "List",
+        "description": "Colonnes Kanban contenant des cartes"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true,
+            "default": "Nouvelle liste"
+        },
+        "order": {
+            "type": "integer",
+            "required": true,
+            "default": 0
+        },
+        "board": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::board.board",
+            "inversedBy": "lists"
+        },
+        "cards": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::card.card",
+            "mappedBy": "list"
+        }
+    }
+}
