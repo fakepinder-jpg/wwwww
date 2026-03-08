@@ -27,6 +27,8 @@ docker-compose --version
 
 **1. Generer le `.env` du backend automatiquement**
 
+> **Important** : ouvrir le terminal **precisement dans le dossier `Backend(strapi)/`** avant de lancer la commande. Si tu es a la racine du projet, utilise `cd` pour naviguer dedans :
+
 ```bash
 cd "Backend(strapi)"
 node setup-env.js
@@ -86,6 +88,8 @@ npm install
 ```
 
 Generer le `.env` automatiquement :
+
+> **Important** : le terminal doit etre ouvert **precisement dans le dossier `Backend(strapi)/`** (pas a la racine du projet) pour que le script fonctionne correctement.
 
 ```bash
 node setup-env.js
