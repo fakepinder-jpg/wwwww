@@ -25,7 +25,7 @@ docker-compose --version
 
 ### Étapes
 
-**1. Générer le `.env` du backend automatiquement**
+**1. Générer le `.env` du backend**
 
 > **Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Ne pas lancer cette commande depuis un autre emplacement, le script ne fonctionnera pas correctement.
 
@@ -34,10 +34,19 @@ node setup-env.js
 ```
 
 Ce script crée le `.env` et génère toutes les clés secrètes nécessaires au démarrage de Strapi.
-Ces clés ne remplacent pas une base de données — la base sera créée automatiquement au premier lancement et tu devras créer ton propre compte admin (étape suivante).
 Si le `.env` existe déjà, le script ne l'écrase pas.
 
-**2. Démarrer uniquement le backend**
+**2. Créer le `.env` du frontend**
+
+> **Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
+
+```bash
+cp .env.example .env
+```
+
+Le `.env` contient déjà la bonne URL par défaut, rien à changer si Strapi tourne sur le port 1337.
+
+**3. Démarrer le backend**
 
 > **Important** : ouvrir le terminal **précisément à la racine du projet** (là où se trouve `docker-compose.yml`).
 
@@ -48,26 +57,28 @@ docker-compose up backend
 Docker va télécharger les images nécessaires et construire le conteneur au premier lancement (cela peut prendre quelques minutes).
 Attendre que Strapi soit prêt — le message `Strapi is listening` apparaît dans les logs.
 
-**3. Créer le compte administrateur Strapi**
+**4. Créer le compte administrateur Strapi**
 
 Ouvrir un navigateur et aller sur http://localhost:1337/admin
 
 Remplir le formulaire pour créer un compte administrateur.
 Ce compte sert uniquement à accéder au panneau d'administration Strapi, ce n'est pas un compte utilisateur de l'app.
 
-(La base de données est vide au départ. Les vrais comptes utilisateurs se créent depuis la page d'inscription du frontend.)
+**5. Activer les permissions d'inscription et de connexion**
 
-**4. Créer le `.env` du frontend**
+Dans le panneau Strapi, aller dans :
 
-> **Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
-
-```bash
-cp .env.example .env
+```
+Settings → Users & Permissions Plugin → Roles → Public
 ```
 
-Le `.env` contient déjà la bonne URL par défaut, rien à changer si Strapi tourne sur le port 1337.
+Dans la section **Auth**, cocher :
+- `callback` (connexion)
+- `register` (inscription)
 
-**5. Démarrer le frontend**
+Puis cliquer sur **Save**. Sans cette étape, le login et l'inscription renverront une erreur 403.
+
+**6. Démarrer le frontend**
 
 > **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **à la racine du projet**.
 
@@ -88,52 +99,20 @@ L'app est accessible sur http://localhost:3000
 - Node.js v18 ou v20 (ne pas utiliser v22+, incompatibilités possibles)
 - npm v9 ou v10 (inclus automatiquement avec Node.js v18/v20)
 
-### 1. Installer le backend (Strapi)
+### 1. Générer le `.env` du backend
 
 > **Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Toutes les commandes de cette section doivent être exécutées depuis ce dossier.
-
-```bash
-npm install
-```
-
-Générer le `.env` automatiquement :
 
 ```bash
 node setup-env.js
 ```
 
 Ce script crée le `.env` et génère toutes les clés secrètes nécessaires au démarrage de Strapi.
-Ces clés ne remplacent pas une base de données — la base sera créée automatiquement au premier lancement et tu devras créer ton propre compte admin (étape suivante).
 Si le `.env` existe déjà, le script ne l'écrase pas.
 
-Démarrer le backend :
+### 2. Créer le `.env` du frontend
 
-```bash
-npm run develop
-```
-
-Strapi tourne sur http://localhost:1337
-
-### 2. Créer le compte administrateur Strapi
-
-Au premier lancement, Strapi va créer la base de données automatiquement (fichier `.tmp/data.db`).
-
-Aller sur http://localhost:1337/admin et créer un compte admin.
-Ce compte sert uniquement à accéder au panneau d'administration Strapi, ce n'est pas le même que le compte utilisateur de l'app.
-
-La base de données est vide au départ. Les utilisateurs de l'app se créent depuis la page d'inscription du frontend.
-
----
-
-### 3. Installer le frontend (React)
-
-> **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Toutes les commandes de cette section doivent être exécutées depuis ce dossier.
-
-```bash
-npm install
-```
-
-Créer le fichier `.env` à partir de l'exemple :
+> **Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
 
 ```bash
 cp .env.example .env
@@ -141,9 +120,44 @@ cp .env.example .env
 
 Le `.env` contient déjà la bonne URL par défaut, rien à changer si Strapi tourne sur le port 1337.
 
-Démarrer le frontend :
+### 3. Installer et démarrer le backend
+
+> **Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`**.
 
 ```bash
+npm install
+npm run develop
+```
+
+Strapi tourne sur http://localhost:1337
+
+### 4. Créer le compte administrateur Strapi
+
+Au premier lancement, Strapi va créer la base de données automatiquement (fichier `.tmp/data.db`).
+
+Aller sur http://localhost:1337/admin et créer un compte admin.
+Ce compte sert uniquement à accéder au panneau d'administration Strapi, ce n'est pas le même que le compte utilisateur de l'app.
+
+### 5. Activer les permissions d'inscription et de connexion
+
+Dans le panneau Strapi, aller dans :
+
+```
+Settings → Users & Permissions Plugin → Roles → Public
+```
+
+Dans la section **Auth**, cocher :
+- `callback` (connexion)
+- `register` (inscription)
+
+Puis cliquer sur **Save**. Sans cette étape, le login et l'inscription renverront une erreur 403.
+
+### 6. Installer et démarrer le frontend
+
+> **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
+
+```bash
+npm install
 npm start
 ```
 
