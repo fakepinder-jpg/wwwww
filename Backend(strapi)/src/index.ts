@@ -8,6 +8,7 @@ export default {
 
 // Active automatiquement les permissions d'inscription et de connexion
 // pour le role Public au premier demarrage (evite de le faire manuellement dans l'admin)
+
 async function activerPermissions(strapi: any) {
   const permissionsParRole: Record<string, string[]> = {
     public: [
@@ -18,21 +19,25 @@ async function activerPermissions(strapi: any) {
       'api::board.board.create',
       'api::board.board.find',
       'api::board.board.findone',
+      'api::board.board.findOne',
       'api::board.board.update',
       'api::board.board.delete',
       'api::list.list.create',
       'api::list.list.find',
       'api::list.list.findone',
+      'api::list.list.findOne',
       'api::list.list.update',
       'api::list.list.delete',
       'api::card.card.create',
       'api::card.card.find',
       'api::card.card.findone',
+      'api::card.card.findOne',
       'api::card.card.update',
       'api::card.card.delete',
       'api::label.label.create',
       'api::label.label.find',
       'api::label.label.findone',
+      'api::label.label.findOne',
       'api::label.label.update',
       'api::label.label.delete',
     ],
@@ -48,7 +53,7 @@ async function activerPermissions(strapi: any) {
       continue;
     }
 
-    // Récupère toutes les permissions existantes pour ce rôle en une seule requête
+    // Recupere toutes les permissions existantes pour ce role en une seule requete
     const existingPerms = await strapi.db
       .query('plugin::users-permissions.permission')
       .findMany({ where: { role: role.id } });
