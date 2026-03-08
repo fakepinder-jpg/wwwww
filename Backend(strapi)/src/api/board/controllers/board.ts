@@ -3,7 +3,7 @@ import { factories } from '@strapi/strapi';
 
 export default factories.createCoreController('api::board.board', ({ strapi }) => ({
 
-  // crée un nouveau tableau pour l'utilisateur connecté
+  // cree un nouveau tableau pour l'utilisateur connecte
   async create(ctx) {
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized('Utilisateur non connecté');
@@ -19,7 +19,7 @@ export default factories.createCoreController('api::board.board', ({ strapi }) =
     return this.transformResponse(entity);
   },
 
-  // recupere tous les tableaux de l'user connecté
+  // recupere tous les tableaux de l'user connecte
   async find(ctx) {
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized();
@@ -42,7 +42,7 @@ export default factories.createCoreController('api::board.board', ({ strapi }) =
     return this.transformResponse(entities);
   },
 
-  // recupere un seul tableau avec toutes ses données
+  // recupere un seul tableau avec toutes ses donnees
   async findOne(ctx) {
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized();

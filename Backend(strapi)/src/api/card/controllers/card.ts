@@ -3,7 +3,7 @@ import { factories } from '@strapi/strapi';
 // controlleur pour les cartes du kanban
 export default factories.createCoreController('api::card.card', ({ strapi }) => ({
   async create(ctx) {
-    // verifie que l'user est connecté
+    // verifie que l'user est connecte
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized('Utilisateur non connecté');
 
@@ -40,12 +40,12 @@ export default factories.createCoreController('api::card.card', ({ strapi }) => 
   },
 
   async update(ctx) {
-    // verifie que l'user est bien connecté
+    // verifie que l'user est bien connecte
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized();
 
     const { id } = ctx.params;
-    // recupere la carte avec toute la hierachy pour verifier le propriétaire
+    // recupere la carte avec toute la hierachy pour verifier le proprietaire
     const card = await strapi.db.query('api::card.card').findOne({
       where: { id: Number(id) },
       populate: {
@@ -63,7 +63,7 @@ export default factories.createCoreController('api::card.card', ({ strapi }) => 
       return ctx.forbidden('Non autorisé');
     }
 
-    // met a jour la carte avec les nouvelles données
+    // met a jour la carte avec les nouvelles donnees
     const updated = await strapi.db.query('api::card.card').update({
       where: { id: Number(id) },
       data: ctx.request.body.data,
@@ -73,7 +73,7 @@ export default factories.createCoreController('api::card.card', ({ strapi }) => 
   },
 
   async delete(ctx) {
-    // verifie que l'user est connecté
+    // verifie que l'user est connecte
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized();
 

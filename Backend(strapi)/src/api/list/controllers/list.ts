@@ -3,7 +3,7 @@ import { factories } from '@strapi/strapi';
 // controlleur pour les listes du kanban
 export default factories.createCoreController('api::list.list', ({ strapi }) => ({
   async create(ctx) {
-    // verifie que l'utilisateur est connecté
+    // verifie que l'utilisateur est connecte
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized('Utilisateur non connecté');
 
@@ -20,7 +20,7 @@ export default factories.createCoreController('api::list.list', ({ strapi }) => 
       return ctx.forbidden('Vous ne pouvez pas ajouter une liste à ce board');
     }
 
-    // cree la liste dans la base de donnée
+    // cree la liste dans la base de donnee
     const entity = await strapi.db.query('api::list.list').create({
       data: {
         title: title || 'Nouvelle liste',
@@ -33,7 +33,7 @@ export default factories.createCoreController('api::list.list', ({ strapi }) => 
   },
 
   async update(ctx) {
-    // verifie que l'user est connecté
+    // verifie que l'user est connecte
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized();
 
@@ -62,7 +62,7 @@ export default factories.createCoreController('api::list.list', ({ strapi }) => 
   },
 
   async delete(ctx) {
-    // verifie que l'user est connecté
+    // verifie que l'user est connecte
     const user = ctx.state.user;
     if (!user) return ctx.unauthorized();
 

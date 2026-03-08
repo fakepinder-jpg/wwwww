@@ -1,8 +1,8 @@
-// politique de securité: verifie que l'user est bien le proprietaire de la ressource
+// politique de securite: verifie que l'user est bien le proprietaire de la ressource
 export default async (policyContext, config, { strapi }) => {
   const user = policyContext.state.user;
 
-  // si pas connecté on refuse direct
+  // si pas connecte on refuse direct
   if (!user) {
     return false;
   }
@@ -27,7 +27,7 @@ export default async (policyContext, config, { strapi }) => {
       return false;
     }
 
-    // on compare l'owner de la ressource avec l'user connecté
+    // on compare l'owner de la ressource avec l'user connecte
     return entity.owner && entity.owner.id === user.id;
   } catch (error) {
     return false;
