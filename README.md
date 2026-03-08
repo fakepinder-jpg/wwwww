@@ -57,7 +57,17 @@ Ce compte sert uniquement à accéder au panneau d'administration Strapi, ce n'e
 
 (La base de données est vide au départ. Les vrais comptes utilisateurs se créent depuis la page d'inscription du frontend.)
 
-**4. Démarrer le frontend**
+**4. Créer le `.env` du frontend**
+
+> **Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
+
+```bash
+cp .env.example .env
+```
+
+Le `.env` contient déjà la bonne URL par défaut, rien à changer si Strapi tourne sur le port 1337.
+
+**5. Démarrer le frontend**
 
 > **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **à la racine du projet**.
 
