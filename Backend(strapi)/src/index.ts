@@ -43,23 +43,36 @@ async function activerPermissions(strapi: any) {
       .query('plugin::users-permissions.role')
       .findOne({ where: { type } });
 
-    if (!role) continue;
+    if (!role) {
+      console.warn(`[permissions] Role "${type}" introuvable, skip.`);
+      continue;
+    }
+
+    // Récupère toutes les permissions existantes pour ce rôle en une seule requête
+    const existingPerms = await strapi.db
+      .query('plugin::users-permissions.permission')
+      .findMany({ where: { role: role.id } });
+
+    const permMap: Record<string, any> = {};
+    for (const p of existingPerms) {
+      permMap[p.action] = p;
+    }
 
     for (const action of actions) {
-      const permission = await strapi.db
-        .query('plugin::users-permissions.permission')
-        .findOne({ where: { action, role: role.id } });
+      const existing = permMap[action];
 
-      if (permission) {
-        if (!permission.enabled) {
+      if (existing) {
+        if (!existing.enabled) {
           await strapi.db
             .query('plugin::users-permissions.permission')
-            .update({ where: { id: permission.id }, data: { enabled: true } });
+            .update({ where: { id: existing.id }, data: { enabled: true } });
+          console.log(`[permissions] Activé: ${action}`);
         }
       } else {
         await strapi.db
           .query('plugin::users-permissions.permission')
           .create({ data: { action, enabled: true, role: role.id } });
+        console.log(`[permissions] Créé: ${action}`);
       }
     }
   }

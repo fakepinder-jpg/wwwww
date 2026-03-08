@@ -60,7 +60,7 @@ exports.default = strapi_1.factories.createCoreController('api::board.board', ({
         if (!entity)
             return ctx.notFound('Board introuvable');
         // on verifie que c'est bien son tableau
-        if (entity.owner.id !== user.id)
+        if (!entity.owner || entity.owner.id !== user.id)
             return ctx.forbidden('Non autorisé');
         return this.transformResponse(entity);
     },

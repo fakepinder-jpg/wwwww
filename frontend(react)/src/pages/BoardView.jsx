@@ -58,7 +58,8 @@ const BoardView = ({ board, onBack }) => {
       setBoardData(data);
       setLists(data.lists || []);
     } catch (err) {
-      setNotification({ message: 'Erreur lors du chargement du tableau', type: 'error' });
+      console.error('Erreur fetchBoard:', err);
+      setNotification({ message: `Erreur lors du chargement du tableau: ${err.message}`, type: 'error' });
     } finally {
       setLoading(false);
     }

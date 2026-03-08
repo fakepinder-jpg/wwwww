@@ -64,7 +64,7 @@ export default factories.createCoreController('api::board.board', ({ strapi }) =
 
     if (!entity) return ctx.notFound('Board introuvable');
     // on verifie que c'est bien son tableau
-    if (entity.owner.id !== user.id) return ctx.forbidden('Non autorisé');
+    if (!entity.owner || entity.owner.id !== user.id) return ctx.forbidden('Non autorisé');
 
     return this.transformResponse(entity);
   },

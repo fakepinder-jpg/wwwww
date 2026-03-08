@@ -8,7 +8,7 @@ exports.default = strapi_1.factories.createCoreController('api::card.card', ({ s
         const user = ctx.state.user;
         if (!user)
             return ctx.unauthorized('Utilisateur non connecté');
-        const { title, description, order, list: listId } = ctx.request.body.data;
+        const { title, description, order, list: listId, dueDate, labels } = ctx.request.body.data;
         if (!listId)
             return ctx.badRequest('La liste est requise');
         // verifie que la liste apartient a l'user via le board
@@ -30,6 +30,8 @@ exports.default = strapi_1.factories.createCoreController('api::card.card', ({ s
                 description: description || '',
                 order: order || 0,
                 list: Number(listId),
+                ...(dueDate && { dueDate }),
+                ...(labels && labels.length > 0 && { labels }),
             },
         });
         return this.transformResponse(entity);

@@ -91,6 +91,7 @@ class StrapiService {
 
   async getBoard(boardId) {
     const res = await this.request(`/boards/${boardId}`);
+    if (!res) throw new Error('Réponse vide du serveur');
     const board = res.data || res;
     const lists = (board.lists || []).sort((a, b) => a.order - b.order);
     return {
