@@ -54,21 +54,7 @@ Au premier lancement, Strapi va créer la base de données automatiquement (fich
 Aller sur http://localhost:1337/admin et créer un compte admin.
 Ce compte sert uniquement à accéder au panneau d'administration Strapi, ce n'est pas le même que le compte utilisateur de l'app.
 
-### 5. Activer les permissions d'inscription et de connexion
-
-Dans le panneau Strapi, aller dans :
-
-```
-Settings → Users & Permissions Plugin → Roles → Public
-```
-
-Dans la section **Users-permissions**, cocher :
-- `callback` (connexion)
-- `register` (inscription)
-
-Puis cliquer sur **Save**. Sans cette étape, le login et l'inscription renverront une erreur 403.
-
-### 6. Installer et démarrer le frontend
+### 5. Installer et démarrer le frontend
 
 **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
 
