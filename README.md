@@ -27,7 +27,7 @@ docker-compose --version
 
 **1. Générer le `.env` du backend**
 
-> **Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Ne pas lancer cette commande depuis un autre emplacement, le script ne fonctionnera pas correctement.
+**Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Ne pas lancer cette commande depuis un autre emplacement, le script ne fonctionnera pas correctement.
 
 ```bash
 node setup-env.js
@@ -38,7 +38,7 @@ Si le `.env` existe déjà, le script ne l'écrase pas.
 
 **2. Créer le `.env` du frontend**
 
-> **Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
+**Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
 
 ```bash
 cp .env.example .env
@@ -48,7 +48,7 @@ Le `.env` contient déjà la bonne URL par défaut, rien à changer si Strapi to
 
 **3. Démarrer le backend**
 
-> **Important** : ouvrir le terminal **précisément à la racine du projet** (là où se trouve `docker-compose.yml`).
+**Important** : ouvrir le terminal **précisément à la racine du projet** (là où se trouve `docker-compose.yml`).
 
 ```bash
 docker-compose up backend
@@ -80,7 +80,7 @@ Puis cliquer sur **Save**. Sans cette étape, le login et l'inscription renverro
 
 **6. Démarrer le frontend**
 
-> **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **à la racine du projet**.
+**Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **à la racine du projet**.
 
 ```bash
 docker-compose up frontend
@@ -101,7 +101,7 @@ L'app est accessible sur http://localhost:3000
 
 ### 1. Générer le `.env` du backend
 
-> **Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Toutes les commandes de cette section doivent être exécutées depuis ce dossier.
+**Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`** (clic droit sur le dossier > "Ouvrir dans le terminal"). Toutes les commandes de cette section doivent être exécutées depuis ce dossier.
 
 ```bash
 node setup-env.js
@@ -112,7 +112,7 @@ Si le `.env` existe déjà, le script ne l'écrase pas.
 
 ### 2. Créer le `.env` du frontend
 
-> **Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
+**Important** : ouvrir le terminal **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
 
 ```bash
 cp .env.example .env
@@ -122,7 +122,7 @@ Le `.env` contient déjà la bonne URL par défaut, rien à changer si Strapi to
 
 ### 3. Installer et démarrer le backend
 
-> **Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`**.
+**Important** : ouvrir le terminal **précisément dans le dossier `Backend(strapi)/`**.
 
 ```bash
 npm install
@@ -154,7 +154,7 @@ Puis cliquer sur **Save**. Sans cette étape, le login et l'inscription renverro
 
 ### 6. Installer et démarrer le frontend
 
-> **Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
+**Important** : ouvrir un **nouveau terminal** (garder le backend qui tourne dans l'autre) **précisément dans le dossier `frontend(react)/`** (clic droit sur le dossier > "Ouvrir dans le terminal").
 
 ```bash
 npm install
@@ -191,3 +191,23 @@ L'app tourne sur http://localhost:3000
 - Les fichiers `.env.example` sont là pour montrer quelles variables sont nécessaires
 - La base de données SQLite est dans `Backend(strapi)/.tmp/data.db`
 - Avec Docker, la base de données est sauvegardée dans un volume Docker nommé `strapi-db`
+
+---
+
+## Réinitialiser la base de données (Docker uniquement)
+
+Si Strapi redirige vers la page de **connexion** au lieu de la page de **création du compte admin**, c'est que la base de données existe déjà dans le volume Docker. Pour repartir de zéro :
+
+**Important** : ouvrir le terminal **à la racine du projet** (là où se trouve `docker-compose.yml`).
+
+```bash
+docker-compose down -v
+```
+
+Puis relancer le backend :
+
+```bash
+docker-compose up backend
+```
+
+La page de création du compte admin réapparaîtra sur http://localhost:1337/admin
