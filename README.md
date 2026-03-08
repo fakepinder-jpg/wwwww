@@ -47,6 +47,8 @@ npm run develop
 
 Strapi tourne sur http://localhost:1337
 
+Les permissions (inscription, connexion, accès aux boards/lists/cards/labels) sont configurées automatiquement au démarrage. Rien à faire manuellement.
+
 ### 4. Créer le compte administrateur Strapi
 
 Au premier lancement, Strapi va créer la base de données automatiquement (fichier `.tmp/data.db`).

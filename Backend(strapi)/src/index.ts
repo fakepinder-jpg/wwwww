@@ -50,10 +50,16 @@ async function activerPermissions(strapi: any) {
         .query('plugin::users-permissions.permission')
         .findOne({ where: { action, role: role.id } });
 
-      if (permission && !permission.enabled) {
+      if (permission) {
+        if (!permission.enabled) {
+          await strapi.db
+            .query('plugin::users-permissions.permission')
+            .update({ where: { id: permission.id }, data: { enabled: true } });
+        }
+      } else {
         await strapi.db
           .query('plugin::users-permissions.permission')
-          .update({ where: { id: permission.id }, data: { enabled: true } });
+          .create({ data: { action, enabled: true, role: role.id } });
       }
     }
   }
