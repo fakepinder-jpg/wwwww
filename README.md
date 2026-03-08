@@ -72,7 +72,7 @@ Dans le panneau Strapi, aller dans :
 Settings → Users & Permissions Plugin → Roles → Public
 ```
 
-Dans la section **Auth**, cocher :
+Dans la section **Users-permissions**, cocher :
 - `callback` (connexion)
 - `register` (inscription)
 
@@ -146,7 +146,7 @@ Dans le panneau Strapi, aller dans :
 Settings → Users & Permissions Plugin → Roles → Public
 ```
 
-Dans la section **Auth**, cocher :
+Dans la section **Users-permissions**, cocher :
 - `callback` (connexion)
 - `register` (inscription)
 
